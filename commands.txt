@@ -1,0 +1,36 @@
+    1  sudo su
+    2  whoami
+    3  tfenv
+    4  sudo apt-get install tfenv
+    5  mkdir -p ~/.local/bin/
+    6  ls ~/.tfenv
+    7  sudo su
+    8  git clone https://github.com/tfutils/tfenv.git ~/.tfenv
+    9  ls ~/.tfenv
+   10  whoami
+   11  vi ~/.zshrc
+   12  source ~/.zshrc
+   13  tfenv
+   14  tfenv list
+   15  tfenv list-remote
+   16  tfenv install 1.0.10
+   17  apt-get install unzip
+   18  tfenv install 1.0.10
+   19  tfenv use 1.0.10
+   20  history
+   21  history > ~/initial_setup.sh
+   22  vi ~/initial_setup.sh
+   23  pwd
+   24  ls
+   25  cat ~/initial_setup.sh
+   26  cd ~
+   27  pwd
+   28  ls
+   29  apt-get install ansible
+   30  sudo apt update
+   31  sudo apt install software-properties-common
+   32  sudo add-apt-repository --yes --update ppa:ansible/ansible
+   33  sudo apt install ansible
+   34  ansibe -v
+   35  ansible -v
+   36  history 
