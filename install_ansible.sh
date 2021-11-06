@@ -1,4 +1,4 @@
-# Ansible
+#/bin/bash
 apt-get install ansible
 sudo apt update
 sudo apt install software-properties-common

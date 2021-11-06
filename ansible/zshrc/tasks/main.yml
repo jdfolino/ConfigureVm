@@ -1,0 +1,5 @@
+- name: This configures zshrc and related command line tools
+  ansible.builtin.copy:
+    src: files/.vimrc
+    dest: "{{ home_dir }}/.vimrc"
+      

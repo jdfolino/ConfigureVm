@@ -1,0 +1,4 @@
+---
+# defaults file for zshrc
+home_dir: /home/azureuser
+base_app_dir: /home/azureuser/cloud-machine
