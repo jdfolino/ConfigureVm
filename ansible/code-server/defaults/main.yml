@@ -1,2 +1,4 @@
 ---
 # defaults file for code-server
+code_server_service_dir: "/tmp"
+code_server_bin_dir: ""
