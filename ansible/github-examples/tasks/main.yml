@@ -3,5 +3,5 @@
 - name: Git checkout
   ansible.builtin.git:
     repo: "{{ item }}"
-    dest: "{{ target_dir }}"
+    dest: "{{ home_dir }}"
   loop: "{{ repos }}"
