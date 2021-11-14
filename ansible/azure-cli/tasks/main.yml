@@ -1,0 +1,5 @@
+---
+- name: Install azure-cli (state=present is optional)
+  apt:
+    name: azure-cli
+    state: present

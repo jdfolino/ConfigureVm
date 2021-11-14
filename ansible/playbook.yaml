@@ -1,7 +1,9 @@
 ---
 - hosts: localhost
   roles:
-    # - role: 'zshrc'
-    # - role: 'code-server'
-    # - role: 'github-examples'
+    - role: 'zshrc'
+    - role: 'code-server'
+    - role: 'github-examples'
     - role: 'tfenv' 
+    - role: 'azure-cli' 
+    

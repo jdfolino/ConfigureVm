@@ -2,4 +2,5 @@
 # defaults file for github_examples
 target_dir: /home/azureuser/Development/Examples 
 repos:
-  - git@github.com:hashicorp/terraform-provider-azurerm.git
+  - git@github.com:hashicorp/terraform-provider-azurerm.
+  
