@@ -1,4 +1,48 @@
 ---
+- name: Import the APT repo key (Debian)
+  apt_key:
+    keyserver: "packages.microsoft.com"
+    id: "52E16F86FEE04B979B07E28DB02C46DF417A0893"
+
+- name: Create the APT repository (Debian)
+  apt_repository:
+    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/focal  main"
+    filename: azure-cli
+    state: present
+
+
+    # fatal: [localhost]: FAILED! => {"changed": false, "cmd": "/usr/bin/apt-key adv --no-tty --keyserver packages.microsoft.com --recv 52E16F86FEE04B979B07E28DB02C46DF417A0893", "msg": "Error fetching key 52E16F86FEE04B979B07E28DB02C46DF417A0893 from keyserver: packages.microsoft.com", "rc": 2, "stderr": "Warning: apt-key output should not be parsed (stdout is not a terminal)\ngpg: keyserver receive failed: Connection timed out\n", "stderr_lines": ["Warning: apt-key output should not be parsed (stdout is not a terminal)", "gpg: keyserver receive failed: Connection timed out"], "stdout": "Executing: /tmp/apt-key-gpghome.XZBEDiq0Uj/gpg.1.sh --no-tty --keyserver packages.microsoft.com --recv 52E16F86FEE04B979B07E28DB02C46DF417A0893\n", "stdout_lines": ["Executing: /tmp/apt-key-gpghome.XZBEDiq0Uj/gpg.1.sh --no-tty --keyserver packages.microsoft.com --recv 52E16F86FEE04B979B07E28DB02C46DF417A0893"]}
+
+- name: Install ca-certificates (state=present is optional)
+  apt:
+    name: ca-certificates
+    state: present
+
+- name: Install curl (state=present is optional)
+  apt:
+    name: curl
+    state: present
+    
+- name: Install apt-transport-https (state=present is optional)
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Install lsb-release (state=present is optional)
+  apt:
+    name: lsb-release
+    state: present
+
+- name: Install gnupg (state=present is optional)
+  apt:
+    name: gnupg
+    state: present
+
+- name: Only run "update_cache=yes" if the last one is more than 3600 seconds ago
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600         
+
 - name: Install azure-cli (state=present is optional)
   apt:
     name: azure-cli
