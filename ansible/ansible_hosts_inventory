@@ -1,0 +1,2 @@
+[code-server]
+3.26.166.84     ansible_connection=ssh        ansible_user=cloud_user    ansible_password=M@ven1983
