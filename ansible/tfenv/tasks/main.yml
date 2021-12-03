@@ -3,8 +3,6 @@
   become: true
   apt:
     upgrade: yes
-    update_cache: yes
-    cache_valid_time: 86400 #One day
 
 - name: Install gnupg (state=present is optional)
   apt:
@@ -37,11 +35,13 @@
 
 
 - name: Add specified repository into sources list
+  become: true
   ansible.builtin.apt_repository:
     repo: "deb [arch=amd64] https://apt.releases.hashicorp.com focal main"
     state: present
 
 - name: Install terraform (state=present is optional)
+  become: true
   apt:
     name: terraform
     state: present
@@ -50,11 +50,12 @@
 - name: Git checkout tfenv
   ansible.builtin.git:
     repo: "https://github.com/tfutils/tfenv.git"
-    dest: "/home/azureuser/.tfenv"
+    dest: "{{ home_dir }}/.tfenv"
 
 - name: Create a symbolic link
+  become: true
   ansible.builtin.file:
-    src: "/home/azureuser/.tfenv/bin/tfenv"
+    src: "{{ home_dir }}/.tfenv/bin/tfenv"
     dest: /usr/local/bin/tfenv
     state: link
 

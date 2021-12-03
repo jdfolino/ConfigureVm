@@ -3,7 +3,7 @@
   roles:
     - role: 'zshrc'
     - role: 'code-server'
-    # - role: 'tfenv' 
+    - role: 'tfenv' 
     - role: 'azure-cli' 
     - role: 'github-examples'
 
