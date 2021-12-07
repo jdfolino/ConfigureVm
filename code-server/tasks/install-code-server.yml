@@ -1,0 +1,28 @@
+- name: Clean up {{ code_server_dir }}
+  become: true
+  file:
+    state: absent
+    path: "{{ code_server_dir }}"
+
+- name: Create {{ code_server_dir }}
+  become: true
+  file:
+    state: directory
+    path: "{{ code_server_dir }}"
+
+- name: Download code-server v3
+  become: true
+  unarchive:
+    remote_src: true
+    src: "{{ code_server_tar_url }}"
+    dest: "{{ code_server_dir }}"
+    extra_opts:
+      - --strip-components=1
+
+- name: Add {{ code_server_bin_dir }}/code-server
+  become: true
+  file:
+    state: link
+    src: "{{ code_server_dir }}{{ '/bin' if code_server_cleaned_ver is version('3.3.0', '>=') else '' }}/code-server"
+    dest: "{{ code_server_bin_dir }}/code-server"
+    force: true

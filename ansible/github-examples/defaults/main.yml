@@ -1,6 +1,0 @@
----
-# defaults file for github_examples
-home_dir: /home/azureuser 
-repos:
-  - https://github.com/hashicorp/terraform-provider-azurerm.git
-  

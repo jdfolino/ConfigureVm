@@ -1,0 +1,37 @@
+- include_vars: acloudguru.yml
+
+- name: Gather Facts
+  setup:
+    gather_subset: '!all'
+
+- name: Check systemd version
+  shell: "set -o pipefail; systemctl --version | head -1 | cut -d' ' -f2"
+  args:
+    executable: /bin/bash
+  register: systemctl_version
+  changed_when: false
+
+- name: Create {{ code_server_service_dir }}
+  become: true
+  file:
+    state: directory
+    path: "{{ code_server_service_dir }}"
+
+- name: Check code-server
+  include_tasks: check-code-server.yml
+
+- import_tasks: install-code-server.yml
+
+- name: This configures code server
+  ansible.builtin.template:
+    src: templates/config.yaml.j2
+    dest: "{{ home_dir }}/.config/code-server/config.yaml"
+
+- name: HTTP URI
+  ansible.builtin.debug:
+    msg: "http://{{ inventory_hostname }} password: {{ code_server_password }}"
+
+# - name: Restart service code-server, in all cases
+#   ansible.builtin.service:
+#     name: code-server
+#     state: restarted

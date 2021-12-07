@@ -1,9 +1,0 @@
----
-- name: Create {{ code_server_service_dir }}
-  become: yes
-  file:
-    state: directory
-    path: "{{ code_server_service_dir }}"
-
-- name: Check code-serverd
-  include_tasks: check-code-server.yml

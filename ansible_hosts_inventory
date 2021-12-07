@@ -1,0 +1,2 @@
+[code-server]
+d4e2cffb781d.mylabserver.com    ansible_connection=ssh        ansible_user=cloud_user    ansible_password=M@ven1983
