@@ -4,4 +4,5 @@
   ansible.builtin.git:
     repo: "{{ item.name }}"
     dest: "{{ home_dir }}/reference_repos/{{ item.dest }}"
+    version: "{{ item.branch }}"
   loop: "{{ repos }}"

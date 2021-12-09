@@ -5,12 +5,11 @@
 - name: Create variable from command
   command: "lsb_release -cs"
   register: lsb_release
+  changed_when: lsb_release.rc != 0
 
-- set_fact:
-    string_to_echo: "{{ lsb_release.stdout }}"
-
-- debug:
-    var: string_to_echo
+- name: "Get distro"
+  set_fact:
+    distro: "{{ lsb_release.stdout }}"
 
 # - name: Import the APT repo key (Debian)
 #   become: true

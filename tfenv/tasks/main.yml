@@ -51,6 +51,7 @@
   ansible.builtin.git:
     repo: "https://github.com/tfutils/tfenv.git"
     dest: "{{ home_dir }}/.tfenv"
+    version: master
 
 - name: Create a symbolic link
   become: true
@@ -61,3 +62,5 @@
 
 - name: Install terraform latest (stable)
   ansible.builtin.command: tfenv install 1.0.10
+  register: result
+  changed_when: false
