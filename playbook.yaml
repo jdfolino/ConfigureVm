@@ -2,7 +2,7 @@
 - hosts: code-server
   roles:
     - role: 'zshrc'
-    - role: 'code-server'
+    - role: 'code_server'
     - role: 'tfenv'
-    - role: 'azure-cli'
-    - role: 'github-examples'
+    - role: 'azure_cli'
+    - role: 'github_examples'

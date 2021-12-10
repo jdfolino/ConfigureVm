@@ -1,0 +1,14 @@
+[Unit]
+Description=VSCode on the web
+After=network.target
+
+[Service]
+User={{ systemd_user }}
+Group={{ systemd_group }}
+
+AmbientCapabilities=CAP_NET_BIND_SERVICE
+WorkingDirectory=/home/cloud_user
+ExecStart=/opt/code-server/bin/code-server
+
+[Install]
+WantedBy=multi-user.target
