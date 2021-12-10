@@ -1,5 +1,4 @@
 ---
-
 - name: Git checkout
   ansible.builtin.git:
     repo: "{{ item.name }}"

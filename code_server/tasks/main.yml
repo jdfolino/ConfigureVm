@@ -1,6 +1,3 @@
-- name: Load Profile
-  include_vars: acloudguru.yml
-
 - name: Gather Facts
   setup:
     gather_subset: '!all'

@@ -2,7 +2,24 @@
 - hosts: code-server
   roles:
     - role: 'zshrc'
+      home_dir: /home/cloud_user
+      base_app_dir: /home/cloud_user/cloud-machine
     - role: 'code_server'
+      home_dir: /home/cloud_user
+      base_app_dir: /home/cloud_user/cloud-machine
+      systemd_user: cloud_user
+      systemd_group: cloud_user
     - role: 'tfenv'
+      home_dir: /home/cloud_user
     - role: 'azure_cli'
     - role: 'github_examples'
+      home_dir: /home/cloud_user
+      repos:
+        - name: https://github.com/hashicorp/terraform-provider-azurerm.git
+          dest: terraform-provider-azurerm
+          branch: main
+        - name: https://github.com/ansible/ansible.git
+          dest: ansible
+          branch: devel
+
+

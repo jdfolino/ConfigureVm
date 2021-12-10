@@ -1,5 +1,0 @@
----
-home_dir: /home/cloud_user
-base_app_dir: /home/cloud_user/cloud-machine
-systemd_user: cloud_user
-systemd_group: cloud_user
