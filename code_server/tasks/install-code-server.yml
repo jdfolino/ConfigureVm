@@ -9,6 +9,7 @@
   file:
     state: directory
     path: "{{ code_server_dir }}"
+    mode: '0755'
 
 - name: Download code-server v3
   become: true
