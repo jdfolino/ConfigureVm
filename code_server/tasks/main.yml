@@ -38,7 +38,7 @@
   become: true
   ansible.builtin.template:
     src: templates/code-server.service.j2
-    dest: "/etc/systemd/system/code-server.service"    
+    dest: "/etc/systemd/system/code-server.service"
 
 - name: Start service code-server, if not started
   become: true
@@ -49,11 +49,3 @@
 - name: HTTP URI
   ansible.builtin.debug:
     msg: "http://{{ inventory_hostname }} password: {{ code_server_password }}"
-
-
-   
-
-# - name: Restart service code-server, in all cases
-#   ansible.builtin.service:
-#     name: code-server
-#     state: restarted
