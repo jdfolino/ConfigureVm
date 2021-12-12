@@ -41,5 +41,3 @@
         - name: https://github.com/ansible/ansible.git
           dest: ansible
           branch: devel
-
-
