@@ -40,14 +40,9 @@
     repo: "deb [arch=amd64] https://apt.releases.hashicorp.com focal main"
     state: present
 
-- name: Install terraform (state=present is optional)
-  become: true
-  apt:
-    name: terraform
-    state: present
-
 # tasks file for tfenv
 - name: Git checkout tfenv
+  become: true
   ansible.builtin.git:
     repo: "https://github.com/tfutils/tfenv.git"
     dest: "{{ home_dir }}/.tfenv"
@@ -61,6 +56,7 @@
     state: link
 
 - name: Install terraform latest (stable)
+  become: true
   ansible.builtin.command: tfenv install 1.0.10
   register: result
   changed_when: false

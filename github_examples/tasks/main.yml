@@ -1,5 +1,6 @@
 ---
 - name: Git checkout
+  become: true
   ansible.builtin.git:
     repo: "{{ item.name }}"
     dest: "{{ home_dir }}/reference_repos/{{ item.dest }}"

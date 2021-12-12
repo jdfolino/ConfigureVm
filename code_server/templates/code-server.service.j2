@@ -7,7 +7,7 @@ User={{ systemd_user }}
 Group={{ systemd_group }}
 
 AmbientCapabilities=CAP_NET_BIND_SERVICE
-WorkingDirectory=/home/cloud_user
+WorkingDirectory=/home/{{ systemd_user }}
 ExecStart=/opt/code-server/bin/code-server
 
 [Install]

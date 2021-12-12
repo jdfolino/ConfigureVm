@@ -21,16 +21,21 @@
 
 - import_tasks: install-code-server.yml
 
-
 - name: Creates directory
+  become: true
   ansible.builtin.file:
-    path: "{{ home_dir }}/cloud_user/.config"
+    path: "{{ home_dir }}/.config/code-server"
     state: directory
+    owner: "{{ systemd_user }}"
+    group: "{{ systemd_group }}"
 
 - name: This configures code server
+  become: true
   ansible.builtin.template:
     src: templates/config.yaml.j2
     dest: "{{ home_dir }}/.config/code-server/config.yaml"
+    owner: "{{ systemd_user }}"
+    group: "{{ systemd_group }}"
 
 - name: This configures code server systemd
   become: true

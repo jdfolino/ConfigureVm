@@ -1,19 +1,39 @@
 ---
 - hosts: code-server
+  vars:
+    user: code_server
+    user_group: code_server
+  pre_tasks:
+    - name: Create group
+      become: true
+      group:
+        name: "{{ user }}"
+        state: present
+    - name: Create Users Task
+      become: true
+      user:
+        name: "code_server"
+        state: present
+        password: "{{ 'default_user_password' | password_hash('sha512','A512') }}"
+        shell: /bin/bash
+        groups: ["{{ user_group }}"]
   roles:
     - role: 'zshrc'
-      home_dir: /home/cloud_user
-      base_app_dir: /home/cloud_user/cloud-machine
+      home_dir: "/home/{{ user }}"
+      base_app_dir: "/home/{{ user }}/cloud-machine"
     - role: 'code_server'
-      home_dir: /home/cloud_user
-      base_app_dir: /home/cloud_user/cloud-machine
-      systemd_user: cloud_user
-      systemd_group: cloud_user
+      home_dir: "/home/{{ user }}"
+      base_app_dir: "/home/{{ user }}/cloud-machine"
+      systemd_user: "{{ user }}"
+      systemd_group: "{{ user_group }}"
+      code_server_tar_url: "https://github.com/cdr/code-server/releases/download/v4.0.0/code-server-4.0.0-linux-amd64.tar.gz"
     - role: 'tfenv'
-      home_dir: /home/cloud_user
+      home_dir: "/home/code_server"
+      user: "{{ user }}"
+      group: "{{ user_group }}"
     - role: 'azure_cli'
     - role: 'github_examples'
-      home_dir: /home/cloud_user
+      home_dir: "/home/code_server"
       repos:
         - name: https://github.com/hashicorp/terraform-provider-azurerm.git
           dest: terraform-provider-azurerm

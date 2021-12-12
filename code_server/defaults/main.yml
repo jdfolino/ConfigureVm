@@ -6,3 +6,4 @@ code_server_user: "{{ ansible_user_id }}"
 code_server_host: 0.0.0.0
 code_server_port: 80
 code_server_password: hellohello
+code_server_tar_url: "https://github.com/cdr/code-server/releases/download/v4.0.0/code-server-4.0.0-linux-amd64.tar.gz"

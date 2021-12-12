@@ -11,7 +11,7 @@
     path: "{{ code_server_dir }}"
     mode: '0755'
 
-- name: Download code-server v3
+- name: Download code-server
   become: true
   unarchive:
     remote_src: true
@@ -24,6 +24,6 @@
   become: true
   file:
     state: link
-    src: "{{ code_server_dir }}{{ '/bin' if code_server_cleaned_ver is version('3.3.0', '>=') else '' }}/code-server"
+    src: "{{ code_server_dir }}/code-server"
     dest: "{{ code_server_bin_dir }}/code-server"
     force: true
