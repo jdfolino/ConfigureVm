@@ -34,6 +34,8 @@
     - role: 'azure_cli'
     - role: 'github_examples'
       home_dir: "/home/code_server"
+      owner: "{{ owner }}"
+      group: "{{ user_group }}"
       repos:
         - name: https://github.com/hashicorp/terraform-provider-azurerm.git
           dest: terraform-provider-azurerm
