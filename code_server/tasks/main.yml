@@ -21,6 +21,8 @@
 
 - import_tasks: install-code-server.yml
 
+- import_tasks: install-nginx-proxy.yml
+
 - name: Creates directory
   become: true
   ansible.builtin.file:

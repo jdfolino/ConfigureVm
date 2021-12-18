@@ -1,0 +1,13 @@
+server {
+    listen {{ nginx_port }};
+    listen [::]:{{ nginx_port }};
+    server_name {{ ansible_host }};
+
+    location / {
+      proxy_pass http://localhost:{{ code_server_port }}/;
+      proxy_set_header Host $host;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection upgrade;
+      proxy_set_header Accept-Encoding gzip;
+    }
+}

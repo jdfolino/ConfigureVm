@@ -1,0 +1,25 @@
+- name: "apt-get update"
+  become: true
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: "install nginx"
+  become: true
+  apt:
+    name: 'nginx'
+    state: latest
+
+- name: This configures code server nginx reverse proxy
+  become: true
+  ansible.builtin.template:
+    src: code-server-nginx.conf.j2
+    dest: "/etc/nginx/sites-enabled/code-server.conf"
+    owner: "{{ systemd_user }}"
+    group: "{{ systemd_group }}"
+
+- name: "restart nginx"
+  become: true
+  service:
+    name: nginx
+    state: restarted
