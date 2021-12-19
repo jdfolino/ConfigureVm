@@ -1,0 +1,4 @@
+---
+version: "1.68.0"
+download_dir: "/tmp"
+download_name: "doctl-linux-amd64.tar.gz"

@@ -1,0 +1,15 @@
+---
+- name: Download doctl
+  become: true
+  ansible.builtin.unarchive:
+    src: "https://github.com/digitalocean/doctl/releases/download/v{{ version }}/doctl-{{ version }}-linux-amd64.tar.gz"
+    dest: /usr/local/bin
+    remote_src: yes
+
+- name: Set token
+  become: true
+  become_user: "{{ git_linux_user }}"
+  ansible.builtin.command: "doctl auth init -t {{ token }}"
+  register: command_output
+
+- debug: msg="{{command_output.stdout}}"

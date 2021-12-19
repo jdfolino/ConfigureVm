@@ -3,6 +3,7 @@
   vars:
     user: code_server
     user_group: code_server
+    home_dir: "/home/{{ user }}"
   pre_tasks:
     - name: Create group
       become: true
@@ -17,7 +18,16 @@
         password: "{{ 'default_user_password' | password_hash('sha512','A512') }}"
         shell: /bin/bash
         groups: ["{{ user_group }}"]
+    - name: Create config dir
+      become: true
+      ansible.builtin.file:
+        path: "/{{ home_dir }}/.config"
+        state: directory
+        owner: "{{ user }}"
   roles:
+    - role: 'doctl'
+      token: "{{ digital_ocean_token }}"
+      git_linux_user: "{{ user }}"
     - role: 'zshrc'
       home_dir: "/home/{{ user }}"
       base_app_dir: "/home/{{ user }}/cloud-machine"
