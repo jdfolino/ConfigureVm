@@ -32,10 +32,13 @@
       user: "{{ user }}"
       group: "{{ user_group }}"
     - role: 'azure_cli'
-    - role: 'github_examples'
+    - role: 'git_setup'
       home_dir: "/home/code_server"
       owner: "{{ owner }}"
       group: "{{ user_group }}"
+      git_linux_user: "{{ user }}"
+      git_full_name: "Jarrod Folino"
+      git_email: "jdfolino.auto@icloud.com"
       repos:
         - name: https://github.com/hashicorp/terraform-provider-azurerm.git
           dest: terraform-provider-azurerm

@@ -1,0 +1,58 @@
+---
+- name: Add an Apt signing key to a specific keyring file
+  become: true
+  ansible.builtin.apt_key:
+    url: https://cli.github.com/packages/githubcli-archive-keyring.gpg
+    keyring: /usr/share/keyrings/githubcli-archive-keyring.gpg
+    id: 2CA32056ED206CB81F44A8CAC99B11DEB97541F0
+
+- name: Add github cli repository into sources list
+  become: true
+  ansible.builtin.apt_repository:
+    repo: deb [trusted=yes] https://cli.github.com/packages stable main
+    state: present
+
+- name: Update repositories cache and install "gh" package
+  become: true
+  apt:
+    name: gh
+    update_cache: yes    
+
+- name: This adds the .ssh folder
+  become: true
+  ansible.builtin.file:
+    state: directory
+    dest: "{{ home_dir }}/.ssh"
+    mode: '0700'
+    owner: "{{ user }}"
+    group: "{{ group }}"
+
+- name: This configures the ssh key for github
+  become: true
+  remote_user: "{{ git_linux_user }}"
+  ansible.builtin.copy:
+    src: id_rsa
+    dest: "{{ home_dir }}/.ssh/id_rsa"
+    mode: '0400'
+    owner: "{{ user }}"
+    group: "{{ group }}"
+
+- name: Git config full name
+  become: true
+  become_user: "{{ git_linux_user }}"
+  ansible.builtin.shell:
+    cmd: "git config --global user.name {{ git_full_name }}"
+
+- name: Git config email
+  become: true
+  become_user: "{{ git_linux_user }}"
+  ansible.builtin.shell:
+    cmd: "git config --global user.email {{ git_email }}"
+
+- name: Git checkout
+  become: true
+  ansible.builtin.git:
+    repo: "{{ item.name }}"
+    dest: "{{ home_dir }}/reference_repos/{{ item.dest }}"
+    version: "{{ item.branch }}"
+  loop: "{{ repos }}"
