@@ -16,7 +16,7 @@
   become: true
   apt:
     name: gh
-    update_cache: yes    
+    update_cache: true
 
 - name: This adds the .ssh folder
   become: true

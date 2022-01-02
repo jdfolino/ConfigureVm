@@ -24,6 +24,10 @@
         path: "/{{ home_dir }}/.config"
         state: directory
         owner: "{{ user }}"
+  post_tasks:
+    - name: HTTP URI
+      ansible.builtin.debug:
+        msg: "http://{{ inventory_hostname }} password: {{ code_server_password }}"
   roles:
     - role: 'doctl'
       token: "{{ digital_ocean_token }}"

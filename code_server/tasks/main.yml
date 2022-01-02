@@ -51,7 +51,3 @@
     name: code-server
     state: started
     enabled: true
-
-- name: HTTP URI
-  ansible.builtin.debug:
-    msg: "http://{{ inventory_hostname }} password: {{ code_server_password }}"
