@@ -1,7 +1,14 @@
 ---
-# AZ_REPO=$(lsb_release -cs)
-# echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" |
-    # sudo tee /etc/apt/sources.list.d/azure-cli.list
+- name: Install dependencies
+  become: true
+  apt:
+    name: 
+      - ca-certificates
+      - curl 
+      - apt-transport-https 
+      - lsb-release 
+      - gnupg
+      
 - name: Create variable from command
   command: "lsb_release -cs"
   register: lsb_release
@@ -11,6 +18,19 @@
   set_fact:
     distro: "{{ lsb_release.stdout }}"
 
-# - name: Import the APT repo key (Debian)
-#   become: true
-#   ansible.builtin.shell: curl -sL https://aka.ms/InstallAzureCLIDeb | sudo bash
+- name: Add an Apt signing key to a specific keyring file
+  become: true
+  ansible.builtin.apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    keyring: /etc/apt/trusted.gpg.d/microsoft.gpg
+
+- name: Add specified repository into sources list
+  become: true
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ distro }} main"
+    state: present
+
+- name: Install AZ CLI
+  become: true
+  apt:
+    name: azure-cli

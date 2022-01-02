@@ -50,6 +50,7 @@
   ansible.builtin.service:
     name: code-server
     state: started
+    enabled: true
 
 - name: HTTP URI
   ansible.builtin.debug:
